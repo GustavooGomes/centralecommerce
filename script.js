@@ -1,3 +1,38 @@
+// Ofuscação básica da senha
+const encodedPassword = btoa('ecom2024'); // Substitua 'senhaSegura123' pela sua senha
+
+function checkPassword() {
+    const inputPassword = document.getElementById('password-input').value;
+    if (btoa(inputPassword) === encodedPassword) {
+        Swal.fire({
+            title: 'Senha correta',
+            text: 'Você será transferido para a tela de controle.',
+            icon: 'success',
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                const overlay = document.getElementById('password-overlay');
+                overlay.style.transition = 'opacity 1s';
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 1000);
+            }
+        });
+    } else {
+        Swal.fire({
+            title: 'Senha incorreta',
+            text: 'Por favor, tente novamente.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+
 function navigateTo(page) {
     let pageTitle = '';
     let pageUrl = '';
