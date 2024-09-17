@@ -16,18 +16,76 @@
         .btn-altenburg {
             background-color: #007BFF; /* Azul Altenburg */
             color: #ffffff;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s;
         }
         .btn-altenburg:hover {
             background-color: #0056b3; /* Azul Altenburg escuro */
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 1); /* Fundo totalmente escuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .overlay-content {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #fff;
+        }
+        .input-dark {
+            background-color: #fff;
+            color: #000; /* Texto da senha em cor escura */
+        }
     </style>
 </head>
 <body class="bg-altenburg-dark text-altenburg-light">
-    <div class="container mx-auto p-4">
-        <h1 class="text-4xl font-bold text-center mb-8">Central de Controle - E-COMMERCE</h1>
+    <div class="overlay" id="password-overlay">
+        <div class="overlay-content">
+            <h2 class="text-2xl mb-4">Acesso Restrito</h2>
+            <p class="mb-4">Esta página é restrita a pessoas autorizadas. Por favor, insira a senha para continuar.</p>
+            <input type="password" id="password-input" class="input input-dark mb-4 p-2 rounded" placeholder="Senha">
+            <button onclick="checkPassword()" class="btn-altenburg p-2 rounded">Entrar</button>
+        </div>
+    </div>
+    <div class="container mx-auto p-4" id="main-content" style="display: none;">
+        <h1 class="text-4xl font-bold text-center mb-8">Central de Controle - E-Commerce</h1>
+        <p class="text-center mb-8">Bem-vindo à central de controle do E-Commerce da Altenburg. Aqui você pode acessar os dashboards de desempenho e consultar pedidos de reposição.</p>
         <div class="flex justify-center space-x-4">
-            <button onclick="navigateTo('dashboards')" class="btn-altenburg p-4 rounded">Visualizar dashboards E-Commerce</button>
-            <button onclick="navigateTo('pedidos')" class="btn-altenburg p-4 rounded">Consultar pedidos em Aberto</button>
+            <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white text-black">
+                <img class="w-full" src="dash.png" alt="Dashboards E-Commerce">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Dashboards E-Commerce</div>
+                    <p class="text-gray-700 text-base">
+                        Visualize os principais indicadores de desempenho do nosso E-Commerce.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <button onclick="navigateTo('dashboards')" class="btn-altenburg">Acessar Dashboards</button>
+                </div>
+            </div>
+            <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white text-black">
+                <img class="w-full" src="ped.png" alt="Consultar pedidos de Reposição">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Consultar pedidos de Reposição</div>
+                    <p class="text-gray-700 text-base">
+                        Consulte e gerencie os pedidos de reposição de produtos.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <button onclick="navigateTo('pedidos')" class="btn-altenburg">Consultar Pedidos</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
